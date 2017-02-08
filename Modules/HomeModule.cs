@@ -9,17 +9,28 @@ namespace Places
   {
     public HomeModule()
     {
-      Get["/"] = _ => View["add_new_place.cshtml"];
+      Get["/"] = _ => {
+        return View["index.cshtml"];
+      };
 
       Get["/view_all_places"] = _ => {
         List<Place> allPlaces = Place.GetAll();
         return View["view_all_places.cshtml", allPlaces];
       };
 
-      Post["/places_added"] = _ => {
+      Get["/places/new"] = _ => {
+       return View["place_form.cshtml"];
+     };
+
+     Get["/places/{id}"] = parameters => {
+       Place place = Place.Find(parameters.id);
+       return View["place.cshtml", place];
+     };
+
+      Post["/view_all_places"] = _ => {
         Place newPlace = new Place(Request.Form["new-city"]);
-        newPlace.Save();
-        return View["places_added.cshtml", newPlace];
+        List<Place> allPlaces = Place.GetAll();
+        return View["view_all_places.cshtml", newPlace];
       };
 
       Post["/places_cleared"] = _ => {

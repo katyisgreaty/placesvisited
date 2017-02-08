@@ -28,9 +28,9 @@ namespace Places
      };
 
       Post["/view_all_places"] = _ => {
-        Place newPlace = new Place(Request.Form["new-city"]);
+        Place newPlace = new Place(Request.Form["new-city"], Request.Form["new-date"]);
         List<Place> allPlaces = Place.GetAll();
-        return View["view_all_places.cshtml", newPlace];
+        return View["view_all_places.cshtml", allPlaces];
       };
 
       Post["/places_cleared"] = _ => {

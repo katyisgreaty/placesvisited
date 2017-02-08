@@ -5,12 +5,14 @@ namespace Places.Objects
   public class Place
   {
     private string _city;
+    private int _date;
     private int _id;
     private static List<Place> _instances = new List<Place> {};
 
-    public Place (string city)
+    public Place (string city, int date)
     {
       _city = city;
+      _date = date;
       _instances.Add(this);
       _id = _instances.Count;
     }
@@ -23,6 +25,15 @@ namespace Places.Objects
     public void SetCity (string newCity)
     {
       _city = newCity;
+    }
+// date
+    public int GetDate()
+    {
+      return _date;
+    }
+    public void SetDate (int newDate)
+    {
+      _date = newDate;
     }
 
     public int GetId()
@@ -41,7 +52,7 @@ namespace Places.Objects
       _instances.Clear();
     }
 
-    public static Task Find(int searchId)
+    public static Place Find(int searchId)
     {
       return _instances[searchId-1];
     }

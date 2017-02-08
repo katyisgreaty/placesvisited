@@ -3,12 +3,14 @@ using Places.Objects;
 using System;
 using System.Collections.Generic;
 
-namespace Places{
+namespace Places
+{
   public class HomeModule: NancyModule
   {
     public HomeModule()
     {
-      Get["/"] = _ => View["add_new_place.cshmtl"];
+      Get["/"] = _ => View["add_new_place.cshtml"];
+
       Get["/view_all_places"] = _ => {
         List<Place> allPlaces = Place.GetAll();
         return View["view_all_places.cshtml", allPlaces];
